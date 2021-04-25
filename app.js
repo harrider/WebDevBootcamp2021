@@ -39,6 +39,21 @@ app.get("/contact", (req, res) => {
 });
 
 
+// Contact route GET action
+app.get("/compose", (req, res) => {
+  res.render("compose");
+});
+
+// Contact route POST action
+app.post("/compose", (req, res) => {
+  const newPost = req.body.newPost;
+  
+  console.log(`The received new post = ${newPost}`);
+  
+  res.redirect("/");
+});
+
+
 // Start the server
 app.listen(port, function() {
   console.log(`Server is running at http://localhost:${port}`);
