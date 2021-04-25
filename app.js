@@ -23,7 +23,7 @@ const port = 3000;
 
 // Home route GET action
 app.get("/", (req, res) => {
-  res.render("home");
+  res.render("home", { content: homeStartingContent });
 })
 
 
