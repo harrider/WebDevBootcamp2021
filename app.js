@@ -21,8 +21,14 @@ app.use(express.static("public"));
 const port = 3000;
 
 
+// Array to store posts
+const posts = [];
+
+
 // Home route GET action
 app.get("/", (req, res) => {
+  console.log(posts);
+  
   res.render("home", { content: homeStartingContent });
 });
 
@@ -51,8 +57,10 @@ app.post("/compose", (req, res) => {
     content: req.body.postBody
   };
   
-  console.log(`Received = title: ${post.title} , post: ${post.content}`);
+  // Add new post to collection of posts
+  posts.push(post);
   
+  // Redirect to home page after adding new post
   res.redirect("/");
 });
 
