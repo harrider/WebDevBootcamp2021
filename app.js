@@ -1,5 +1,6 @@
 const express = require("express");
 const ejs = require("ejs");
+const _ = require("lodash");
 
 
 // Starting content
@@ -60,6 +61,19 @@ app.post("/compose", (req, res) => {
   
   // Redirect to home page after adding new post
   res.redirect("/");
+});
+
+
+app.get("/posts/:postTitle", (req, res) => {
+  const postTitle = _.lowerCase(req.params.postTitle);
+
+  posts.forEach(post => {
+    const storedTitle = _.lowerCase(post.title);
+
+    if(storedTitle === postTitle) {
+      res.render("post", { title: post.title, content: post.content });
+    }
+  });
 });
 
 

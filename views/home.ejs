@@ -5,10 +5,12 @@
     <p><%= content %></p>
 
     <div>
-        <% posts.forEach(post => { %>
+        <% posts.forEach( (post, idx) => { %>
+            <% const slicedContent = post.content.substring(0, 100); %>
+            
             <div>
                 <h1><%= post.title %></h1>
-                <p><%= post.content %></p>
+                <p><%= slicedContent %> ... <a href="/posts/<%= post.title %>"> Read More</a></p>
             </div>
         <% }); %>
     </div>
