@@ -24,7 +24,19 @@ const port = 3000;
 // Home route GET action
 app.get("/", (req, res) => {
   res.render("home", { content: homeStartingContent });
-})
+});
+
+
+// About route GET action
+app.get("/about", (req, res) => {
+  res.render("about", { content: aboutContent });
+});
+
+
+// Contact route GET action
+app.get("/contact", (req, res) => {
+  res.render("contact", { content: contactContent });
+});
 
 
 // Start the server
