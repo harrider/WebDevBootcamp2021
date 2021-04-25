@@ -46,9 +46,12 @@ app.get("/compose", (req, res) => {
 
 // Contact route POST action
 app.post("/compose", (req, res) => {
-  const newPost = req.body.newPost;
+  const post = {
+    title: req.body.postTitle,
+    content: req.body.postBody
+  };
   
-  console.log(`The received new post = ${newPost}`);
+  console.log(`Received = title: ${post.title} , post: ${post.content}`);
   
   res.redirect("/");
 });
