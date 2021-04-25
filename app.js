@@ -1,5 +1,6 @@
 const express = require("express");
 const ejs = require("ejs");
+const _ = require("lodash");
 
 
 // Starting content
@@ -21,9 +22,13 @@ app.use(express.static("public"));
 const port = 3000;
 
 
+// Array to store posts
+const posts = [];
+
+
 // Home route GET action
 app.get("/", (req, res) => {
-  res.render("home", { content: homeStartingContent });
+  res.render("home", { content: homeStartingContent, posts: posts });
 });
 
 
@@ -46,11 +51,29 @@ app.get("/compose", (req, res) => {
 
 // Contact route POST action
 app.post("/compose", (req, res) => {
-  const newPost = req.body.newPost;
+  const post = {
+    title: req.body.postTitle,
+    content: req.body.postBody
+  };
   
-  console.log(`The received new post = ${newPost}`);
+  // Add new post to collection of posts
+  posts.push(post);
   
+  // Redirect to home page after adding new post
   res.redirect("/");
+});
+
+
+app.get("/posts/:postTitle", (req, res) => {
+  const postTitle = _.lowerCase(req.params.postTitle);
+
+  posts.forEach(post => {
+    const storedTitle = _.lowerCase(post.title);
+
+    if(storedTitle === postTitle) {
+      res.render("post", { title: post.title, content: post.content });
+    }
+  });
 });
 
 
