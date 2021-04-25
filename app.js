@@ -27,9 +27,7 @@ const posts = [];
 
 // Home route GET action
 app.get("/", (req, res) => {
-  console.log(posts);
-  
-  res.render("home", { content: homeStartingContent });
+  res.render("home", { content: homeStartingContent, posts: posts });
 });
 
 
